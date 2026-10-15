@@ -4,7 +4,7 @@ Use the hosted, read-only MCP server when the current chat supports remote MCP:
 
 `https://fish-wiki-mcp.leafy-bream-8099.chatgpt.site/mcp`
 
-If it is not connected yet, ask the user to add this URL as a remote MCP connector; reading this repository alone does not create a tool connection. Setup for ChatGPT and Claude, including both their chat UI and API methods, is at the top of `README.md` and `README.ru.md`.
+If it is not connected yet, ask the user to add this URL as a remote MCP connector; reading this repository alone does not create a tool connection. Setup for ChatGPT and Claude, including both their chat UI and API methods, is at the top of `README.md` and `README.ru.md`. For DeepSeek, use the documented DeepSeek Harness Web UI setup; the regular `chat.deepseek.com` interface does not expose a custom MCP connection setting.
 
 For questions about Fisch game facts:
 

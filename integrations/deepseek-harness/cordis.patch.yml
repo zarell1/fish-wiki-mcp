@@ -1,0 +1,7 @@
+- insert:
+    - id: mcp-fish-wiki
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: fish_wiki
+        transport: streamable-http
+        url: https://fish-wiki-mcp.leafy-bream-8099.chatgpt.site/mcp

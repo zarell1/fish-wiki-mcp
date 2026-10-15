@@ -8,6 +8,22 @@
 
 Облачный Worker обращается к MediaWiki API **официальной** Fischipedia при вызове инструмента. Чату не нужны ваш компьютер, локальная база или запущенный GitHub Actions. Сервер доступен по MCP Streamable HTTP и предоставляет инструменты только для чтения.
 
+### DeepSeek в обычном веб-чате: DeepSeek Harness
+
+На `chat.deepseek.com` нельзя добавить свой MCP-сервер. Чтобы пользоваться Fisch Wiki в привычном формате чата на базе DeepSeek, используйте официальный [DeepSeek Harness](https://deepseek.com/harness/) — его веб-интерфейс поддерживает внешние MCP-серверы. Это отдельный чат, не вкладка `chat.deepseek.com`; модель DeepSeek настраивается в Harness через DeepSeek API, ключ можно сохранить в **Settings → Models**.
+
+1. Установите Node.js и запустите Harness из корня этого репозитория:
+
+   ```sh
+   npx @deepseek-ai/dsh web --patch ./integrations/deepseek-harness/cordis.patch.yml
+   ```
+
+2. Откройте адрес Web UI, показанный Harness (обычно `http://127.0.0.1:3080`).
+3. В Harness откройте **Settings → Models**, добавьте API-ключ DeepSeek и выберите модель.
+4. Создайте новый чат и попросите найти сведения в официальной Fisch Wiki. В списке инструментов появятся `mcp__fish_wiki__wiki_search`, `mcp__fish_wiki__wiki_page` и другие.
+
+Команда запускает чат-сервер на компьютере, где она выполнена. Для доступа без включённого личного ПК разверните Harness на постоянно работающем сервере и защитите веб-интерфейс аутентификацией и HTTPS; сам Fisch Wiki MCP уже размещён в облаке. См. [руководство Harness по MCP](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/mcp/mcp-client/README.md) и [настройку моделей](https://deepseek-harness.github.io/deepseek-harness/en/guide/providers).
+
 ### ChatGPT в браузере: custom MCP connector
 
 1. Откройте в ChatGPT **Plugins** и выберите **+ → Add custom MCP server**.

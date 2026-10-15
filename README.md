@@ -8,6 +8,22 @@
 
 The hosted Worker calls the **official** Fischipedia MediaWiki API when an agent invokes a tool. Cloud chats do not need your PC, a local database, or a running GitHub Actions job. The server is read-only and accepts MCP Streamable HTTP.
 
+### DeepSeek in a regular chat UI: DeepSeek Harness
+
+`chat.deepseek.com` does not let users add a custom MCP server. To use Fisch Wiki in a familiar DeepSeek-powered chat UI, use the official [DeepSeek Harness](https://deepseek.com/harness/), whose Web UI supports external MCP servers. It is a separate chat from `chat.deepseek.com`; configure the DeepSeek model through the DeepSeek API and save its key under **Settings → Models**.
+
+1. Install Node.js and run Harness from this repository's root:
+
+   ```sh
+   npx @deepseek-ai/dsh web --patch ./integrations/deepseek-harness/cordis.patch.yml
+   ```
+
+2. Open the Web UI address printed by Harness (usually `http://127.0.0.1:3080`).
+3. In Harness, open **Settings → Models**, add your DeepSeek API key, and select a model.
+4. Start a new chat and ask it to search the official Fisch Wiki. You should see tools such as `mcp__fish_wiki__wiki_search` and `mcp__fish_wiki__wiki_page`.
+
+This command runs the chat server on the machine where you launch it. For access without keeping your personal PC on, deploy Harness on an always-on server and protect its Web UI with authentication and HTTPS; the Fisch Wiki MCP itself is already cloud-hosted. See the [Harness MCP guide](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/mcp/mcp-client/README.md) and [model setup guide](https://deepseek-harness.github.io/deepseek-harness/en/guide/providers).
+
 ### ChatGPT web: custom MCP connector
 
 1. Open **Plugins** in ChatGPT and select **+ → Add custom MCP server**.
