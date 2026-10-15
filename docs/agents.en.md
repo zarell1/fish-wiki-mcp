@@ -2,14 +2,14 @@
 
 [English](agents.en.md) · [Русский](agents.ru.md) · [Home](../README.md)
 
-First check what the AI environment can do, then follow one route:
+First check which tools the host client actually exposes to the model. A repository link or prompt does not give the model internet access or connect MCP:
 
 | Environment | Route | Requirements |
 | --- | --- | --- |
 | Cloud chat with MCP settings | Connect hosted MCP | Server URL; platform authorization if prompted |
 | OpenAI or Anthropic API agent | Connect remote MCP in the API request | Provider API access and key |
 | DeepSeek Harness | Install the ready MCP patch | Node.js and DeepSeek API key |
-| Chat without MCP but with browser/HTTP | Query the official MediaWiki API | Web search or HTTP access |
+| Chat without MCP but with a host-provided browser/HTTP tool | Query the official MediaWiki API through that tool | Host client exposes browser/fetch/HTTP |
 | Codex, Claude Desktop, or another local client | Run local stdio MCP | Python and a synced local index |
 | No MCP and no network access | Live data is unavailable | Ask the user to enable a data source |
 
@@ -67,10 +67,10 @@ In Claude Desktop, add this remote server through **Settings → Connectors**. R
 
 ## Repository link only
 
-If an AI receives only this repository link, ask it to read the short map in [`llms.txt`](../llms.txt), then the agent instructions in [`AGENTS.md`](../AGENTS.md). It should select the best available route:
+If an AI receives only this repository link, ask it to read the short map in [`llms.txt`](../llms.txt), then the agent instructions in [`AGENTS.md`](../AGENTS.md). The link itself gives the model no network tools. It should select a route the host actually provides:
 
-1. **Remote MCP is available:** connect to the URL above and call the tools.
-2. **No MCP, but browser or HTTP access is available:** query `https://fischipedia.org/w/api.php` directly. For example, search:
+1. **The host connected remote MCP and exposed its tools:** call them. If the host supports MCP but is not configured yet, its administrator/user must add the URL from this guide, enable the discovered tools, and forward results to the model.
+2. **No MCP tools, but the host provided a browser/HTTP tool:** use that tool to query `https://fischipedia.org/w/api.php`. For example, search:
 
    ```text
    https://fischipedia.org/w/api.php?action=query&list=search&srsearch=Napoleonfish&srlimit=10&format=json&formatversion=2
@@ -78,9 +78,10 @@ If an AI receives only this repository link, ask it to read the short map in [`l
 
    Read a result with `action=parse`. Follow MediaWiki `continue` fields when a complete listing is required.
 
-3. **No network access:** say that current facts cannot be checked. Do not answer from memory or use another Fisch Wiki.
+3. **The host only opens URLs or provides web search:** this does not invoke MCP. The host must support Streamable HTTP JSON-RPC, handle authorization if required, and pass MCP results to the model. Use web search only when it actually returns material from the official domain.
+4. **The host provides neither MCP tools nor a browser/HTTP tool:** say that current facts cannot be checked. Do not answer from memory or use another Fisch Wiki.
 
-GitHub hosts code and instructions; it does not run MCP or grant a chat network access.
+GitHub hosts code and instructions; it does not run MCP or grant a chat network access. An ordinary browser/HTTP fetch of the `/mcp` URL is not an MCP client either.
 
 ## API agents
 

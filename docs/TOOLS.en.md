@@ -53,4 +53,4 @@ The repository root also contains `agent_config.json`, `api_tools.json`, `agent_
 
 ## Direct MediaWiki API
 
-If the agent has no MCP tools but has HTTP access, query `https://fischipedia.org/w/api.php` directly. This is an HTTP fallback, not an MCP tool call. See [Repository link only](agents.en.md#repository-link-only) for instructions and examples.
+If the host client exposes a browser/HTTP tool but no MCP tools, use that tool to query `https://fischipedia.org/w/api.php`. This is an HTTP fallback, not an MCP tool call. A prompt or repository link cannot grant network access, and opening the `/mcp` URL with a regular fetcher does not invoke MCP. See [Repository link only](agents.en.md#repository-link-only) for instructions and examples.
