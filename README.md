@@ -28,12 +28,12 @@ GitHub stores the instructions; it does not run the MCP server. The HTTP fallbac
 
 ### ChatGPT
 
-- **Web:** add the URL above under **Settings → Apps/Connectors → Create** and enable Fisch Wiki tools. Availability depends on plan and workspace settings. [Setup guide](https://help.openai.com/en/articles/12584461-connecting-custom-mcp-servers-in-chatgpt).
+- **Web:** add the URL above under **Settings → Apps/Connectors → Create**, complete authorization if prompted, and enable Fisch Wiki tools. Availability depends on plan and workspace settings. [Setup guide](https://help.openai.com/en/articles/12584461-connecting-custom-mcp-servers-in-chatgpt).
 - **API:** connect the same URL as a remote MCP server in the [Responses API](https://platform.openai.com/docs/api-reference/responses).
 
 ### Claude
 
-- **Web:** add the URL under **Settings → Connectors → Add custom connector**, then enable Fisch Wiki in the chat. [Setup guide](https://support.anthropic.com/en/articles/11503834-building-custom-integrations-via-remote-mcp-servers).
+- **Web:** add the URL under **Settings → Connectors → Add custom connector**, complete authorization if prompted, then enable Fisch Wiki in the chat. [Setup guide](https://support.anthropic.com/en/articles/11503834-building-custom-integrations-via-remote-mcp-servers).
 - **API:** use the MCP connector for the [Messages API](https://platform.claude.com/docs/en/agents-and-tools/mcp-connector).
 
 ### DeepSeek

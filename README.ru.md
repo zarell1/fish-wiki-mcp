@@ -28,12 +28,12 @@ GitHub хранит инструкции, но не запускает MCP. Ре
 
 ### ChatGPT
 
-- **Веб-чат:** добавьте URL выше в **Settings → Apps/Connectors → Create** и разрешите инструменты Fisch Wiki. Возможности зависят от плана и настроек workspace. [Документация](https://help.openai.com/en/articles/12584461-connecting-custom-mcp-servers-in-chatgpt).
+- **Веб-чат:** добавьте URL выше в **Settings → Apps/Connectors → Create**, пройдите авторизацию, если её запросит платформа, и разрешите инструменты Fisch Wiki. Возможности зависят от плана и настроек workspace. [Документация](https://help.openai.com/en/articles/12584461-connecting-custom-mcp-servers-in-chatgpt).
 - **API:** подключите тот же URL как remote MCP в [Responses API](https://platform.openai.com/docs/api-reference/responses).
 
 ### Claude
 
-- **Веб-чат:** добавьте URL в **Settings → Connectors → Add custom connector** и включите Fisch Wiki в чате. [Инструкция](https://support.anthropic.com/en/articles/11503834-building-custom-integrations-via-remote-mcp-servers).
+- **Веб-чат:** добавьте URL в **Settings → Connectors → Add custom connector**, пройдите авторизацию, если её запросит платформа, и включите Fisch Wiki в чате. [Инструкция](https://support.anthropic.com/en/articles/11503834-building-custom-integrations-via-remote-mcp-servers).
 - **API:** используйте MCP connector для [Messages API](https://platform.claude.com/docs/en/agents-and-tools/mcp-connector).
 
 ### DeepSeek
