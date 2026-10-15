@@ -27,7 +27,7 @@
 
 ЕСЛИ MCP НЕДОСТУПЕН
 - Если хост предоставил HTTP GET tool, используй JSON-маршруты репозитория: GET https://fish-wiki-mcp.leafy-bream-8099.chatgpt.site/api/status, затем /api/search?query=<закодированный запрос>, /api/page?title=<закодированное название> или /api/table?title=<закодированное название>&index=0. Для списков используй /api/category?name=<закодированная категория>&limit=100 или /api/pages?namespace=0&limit=100. Эти маршруты возвращают JSON и обращаются к тому же официальному источнику; это не вызовы MCP.
-- Передавай каждый полученный continue_token без изменений, пока он не станет null. Если HTTP-маршруты репозитория недоступны, используй предоставленный хостом HTTP tool для https://fischipedia.org/w/api.php: поиск — action=query&list=search&srsearch=<запрос>&format=json&formatversion=2; страница — action=parse&page=<название>&prop=wikitext%7Ccategories&format=json&formatversion=2. Кодируй значения URL. Это обычный HTTP, не MCP.
+- Передавай каждый полученный continue_token без изменений, пока он не станет null. Если HTTP-маршруты репозитория вернули HTTP 403/Cloudflare challenge или недоступны, используй предоставленный хостом HTTP tool для https://fischipedia.org/w/api.php: поиск — action=query&list=search&srsearch=<запрос>&format=json&formatversion=2; страница — action=parse&page=<название>&prop=wikitext%7Ccategories&format=json&formatversion=2. Кодируй значения URL. Это обычный HTTP, не MCP.
 
 ФОРМАТ ОТВЕТА
 - Сначала дай прямой ответ, затем важные условия/оговорки и ссылки на первоисточники.

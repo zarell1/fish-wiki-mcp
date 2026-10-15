@@ -27,7 +27,7 @@ MCP WORKFLOW
 
 IF MCP IS UNAVAILABLE
 - If the host provides an HTTP GET tool, use the repository's JSON routes: GET https://fish-wiki-mcp.leafy-bream-8099.chatgpt.site/api/status, then /api/search?query=<encoded query>, /api/page?title=<encoded title>, or /api/table?title=<encoded title>&index=0. For listings use /api/category?name=<encoded category>&limit=100 or /api/pages?namespace=0&limit=100. These routes return JSON directly and call the same official source; they are not MCP calls.
-- Pass each returned continue_token unchanged until it is null. If the repository HTTP routes are unavailable, use the host's HTTP tool for https://fischipedia.org/w/api.php: search with action=query&list=search&srsearch=<query>&format=json&formatversion=2; read with action=parse&page=<title>&prop=wikitext%7Ccategories&format=json&formatversion=2. URL-encode substituted values.
+- Pass each returned continue_token unchanged until it is null. If the repository HTTP routes return HTTP 403/Cloudflare challenge or are unreachable, use the host's HTTP tool for https://fischipedia.org/w/api.php: search with action=query&list=search&srsearch=<query>&format=json&formatversion=2; read with action=parse&page=<title>&prop=wikitext%7Ccategories&format=json&formatversion=2. URL-encode substituted values.
 
 ANSWER FORMAT
 - Give the direct answer first, then relevant conditions/caveats and primary-source links.

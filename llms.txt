@@ -8,7 +8,7 @@
 - Choose the platform-specific setup in [`docs/agents.en.md`](https://github.com/zarell1/fish-wiki-mcp/blob/main/docs/agents.en.md) or [`docs/agents.ru.md`](https://github.com/zarell1/fish-wiki-mcp/blob/main/docs/agents.ru.md); copy the [English](https://github.com/zarell1/fish-wiki-mcp/blob/main/docs/CLOUD_PROMPT.en.md) or [Russian](https://github.com/zarell1/fish-wiki-mcp/blob/main/docs/CLOUD_PROMPT.ru.md) cloud prompt.
 - See the [tool reference](https://github.com/zarell1/fish-wiki-mcp/blob/main/docs/TOOLS.en.md) for arguments, pagination, and local/cloud differences.
 - Use the MCP URL only when the host client supports remote MCP (Streamable HTTP JSON-RPC), connects/discovers its tools, handles required authorization, and forwards tool results to the model. A model cannot connect by reading this repository link.
-- If the host client exposes a browser/HTTP tool but no MCP tools, call the repository's read-only JSON endpoints at `https://fish-wiki-mcp.leafy-bream-8099.chatgpt.site/api/` (see `AGENTS.md`); they query official Fischipedia. Direct MediaWiki API requests to `https://fischipedia.org/w/api.php` are also available through that host tool. Opening `/mcp` in a regular fetcher does not invoke MCP.
+- If the host client exposes a browser/HTTP tool but no MCP tools, try the repository's read-only JSON endpoints at `https://fish-wiki-mcp.leafy-bream-8099.chatgpt.site/api/` (see `AGENTS.md`). If Cloudflare returns 403 or the routes cannot be reached, use that host tool directly with `https://fischipedia.org/w/api.php`. Opening `/mcp` in a regular fetcher does not invoke MCP.
 - If the host provides neither tool route, say live data is unavailable. Never invent facts or use another Fisch Wiki.
 
 ## MCP use
