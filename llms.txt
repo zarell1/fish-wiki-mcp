@@ -5,6 +5,8 @@
 ## For AI agents
 
 - Follow [`AGENTS.md`](https://github.com/zarell1/fish-wiki-mcp/blob/main/AGENTS.md) for identity, source rules, and automatic route selection.
+- Choose the platform-specific setup in [`docs/agents.en.md`](https://github.com/zarell1/fish-wiki-mcp/blob/main/docs/agents.en.md) or [`docs/agents.ru.md`](https://github.com/zarell1/fish-wiki-mcp/blob/main/docs/agents.ru.md); copy the [English](https://github.com/zarell1/fish-wiki-mcp/blob/main/docs/CLOUD_PROMPT.en.md) or [Russian](https://github.com/zarell1/fish-wiki-mcp/blob/main/docs/CLOUD_PROMPT.ru.md) cloud prompt.
+- See the [tool reference](https://github.com/zarell1/fish-wiki-mcp/blob/main/docs/TOOLS.en.md) for arguments, pagination, and local/cloud differences.
 - If remote MCP tools are available, connect to `https://fish-wiki-mcp.leafy-bream-8099.chatgpt.site/mcp` (Streamable HTTP).
 - If MCP is unavailable but HTTP is available, use `https://fischipedia.org/w/api.php` directly as described in `AGENTS.md`.
 - If neither route has network access, say live data is unavailable. Never invent facts or use another Fisch Wiki.
