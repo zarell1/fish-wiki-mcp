@@ -1,4 +1,4 @@
-﻿# Fisch Wiki MCP
+# Fisch Wiki MCP
 
 [English](README.md) · [Русский](README.ru.md)
 

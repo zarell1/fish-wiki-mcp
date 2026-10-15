@@ -1,4 +1,4 @@
-﻿# Fisch Wiki MCP
+# Fisch Wiki MCP
 
 [English](README.md) · [Русский](README.ru.md)
 
@@ -69,7 +69,7 @@ Run `python fischwiki_api.py serve`, then open `http://127.0.0.1:8765/docs`.
 
 `.github/workflows/sync.yml` runs at `*/5 * * * *` and can also be started from the Actions tab. It probes Fischipedia, restores the preceding `fish-wiki-index` artifact, synchronizes, then replaces that artifact with the updated SQLite database. The repository does not contain a hosted MCP service: download the artifact and point a local MCP server at the restored database to use the Actions-maintained index.
 
-GitHub may delay scheduled runs during high load. The first full sync can also take longer than five minutes; the workflow serializes runs and keeps using the latest completed index.
+GitHub may delay scheduled runs during high load. The first full sync can also take longer than five minutes; the workflow serializes runs and keeps using the latest completed index. In the initial GitHub-hosted run on 2026-10-15, both official API endpoints returned `403 Forbidden` to the runner, while the same probe succeeded from a local machine. The workflow therefore stops before indexing and does not publish an artifact until Fischipedia allows requests from the runner. Do not treat a failed run as a successful sync; run `probe` and `sync` locally where the official API is accessible.
 
 ## Checks
 
