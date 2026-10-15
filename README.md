@@ -8,9 +8,19 @@
 
 The hosted Worker calls the **official** Fischipedia MediaWiki API when an agent invokes a tool. Cloud chats do not need your PC, a local database, or a running GitHub Actions job. The server is read-only and accepts MCP Streamable HTTP.
 
-### DeepSeek in a regular chat UI: DeepSeek Harness
+### DeepSeek chat without an API key: built-in Internet Search
 
-`chat.deepseek.com` does not let users add a custom MCP server. To use Fisch Wiki in a familiar DeepSeek-powered chat UI, use the official [DeepSeek Harness](https://deepseek.com/harness/), whose Web UI supports external MCP servers. It is a separate chat from `chat.deepseek.com`; configure the DeepSeek model through the DeepSeek API and save its key under **Settings → Models**.
+In the regular DeepSeek web chat, enable **Internet Search** and send the instruction below. This needs no API key. DeepSeek searches Fischipedia directly; it does not connect to this project's MCP endpoint, so search coverage and pagination depend on DeepSeek's web search. [DeepSeek introduced Internet Search in its web chat](https://api-docs.deepseek.com/news/news1210/).
+
+```text
+For questions about the game Fisch, use Internet Search and rely only on the official Fischipedia at https://fischipedia.org. Open the official page and cite its exact URL for every factual claim. Do not use other Fisch Wiki sites, forums, videos, or uncited search snippets. If you cannot verify a fact on Fischipedia, say so instead of guessing.
+```
+
+Then ask your question normally, for example: “What bait works best for the Napoleonfish?”
+
+### DeepSeek Harness: connect the actual MCP server
+
+For model-driven MCP tool calls in a regular chat UI, use the official [DeepSeek Harness](https://deepseek.com/harness/), whose Web UI supports external MCP servers. It is a separate chat from `chat.deepseek.com` and uses the DeepSeek API; an API key is required in **Settings → Models**.
 
 1. Install Node.js and run Harness from this repository's root:
 
