@@ -21,7 +21,9 @@ const initialized = await worker.fetch(new Request("https://example.test/mcp", {
   body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "initialize", params: { protocolVersion: "2025-11-25" } }),
 }));
 assert.equal(initialized.status, 200);
-assert.equal((await initialized.json()).result.protocolVersion, "2025-11-25");
+const initialization = await initialized.json();
+assert.equal(initialization.result.protocolVersion, "2025-11-25");
+assert.match(initialization.result.instructions, /official https:\/\/fischipedia\.org/);
 
 const listing = await worker.fetch(new Request("https://example.test/mcp", {
   method: "POST",
@@ -29,6 +31,15 @@ const listing = await worker.fetch(new Request("https://example.test/mcp", {
   body: JSON.stringify({ jsonrpc: "2.0", id: 2, method: "tools/list" }),
 }));
 assert.equal((await listing.json()).result.tools.length, 7);
+
+const discovery = await worker.fetch(new Request("https://example.test/mcp", {
+  method: "POST",
+  headers: { "content-type": "application/json" },
+  body: JSON.stringify({ jsonrpc: "2.0", id: 20, method: "server/discover" }),
+}));
+const discoveryResult = (await discovery.json()).result;
+assert.ok(discoveryResult.supportedVersions.includes("2026-07-28"));
+assert.equal(discoveryResult.instructions, initialization.result.instructions);
 
 const status = await worker.fetch(new Request("https://example.test/mcp", {
   method: "POST",
