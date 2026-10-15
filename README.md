@@ -8,17 +8,7 @@
 
 The hosted Worker calls the **official** Fischipedia MediaWiki API when an agent invokes a tool. Cloud chats do not need your PC, a local database, or a running GitHub Actions job. The server is read-only and accepts MCP Streamable HTTP.
 
-### DeepSeek chat without an API key: built-in Internet Search
-
-In the regular DeepSeek web chat, enable **Internet Search** and send the instruction below. This needs no API key. DeepSeek searches Fischipedia directly; it does not connect to this project's MCP endpoint, so search coverage and pagination depend on DeepSeek's web search. [DeepSeek introduced Internet Search in its web chat](https://api-docs.deepseek.com/news/news1210/).
-
-```text
-For questions about the game Fisch, use Internet Search and rely only on the official Fischipedia at https://fischipedia.org. Open the official page and cite its exact URL for every factual claim. Do not use other Fisch Wiki sites, forums, videos, or uncited search snippets. If you cannot verify a fact on Fischipedia, say so instead of guessing.
-```
-
-Then ask your question normally, for example: “What bait works best for the Napoleonfish?”
-
-### DeepSeek Harness: connect the actual MCP server
+### DeepSeek Harness: actual remote MCP connection
 
 For model-driven MCP tool calls in a regular chat UI, use the official [DeepSeek Harness](https://deepseek.com/harness/), whose Web UI supports external MCP servers. It is a separate chat from `chat.deepseek.com` and uses the DeepSeek API; an API key is required in **Settings → Models**.
 
@@ -33,6 +23,8 @@ For model-driven MCP tool calls in a regular chat UI, use the official [DeepSeek
 4. Start a new chat and ask it to search the official Fisch Wiki. You should see tools such as `mcp__fish_wiki__wiki_search` and `mcp__fish_wiki__wiki_page`.
 
 This command runs the chat server on the machine where you launch it. For access without keeping your personal PC on, deploy Harness on an always-on server and protect its Web UI with authentication and HTTPS; the Fisch Wiki MCP itself is already cloud-hosted. See the [Harness MCP guide](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/mcp/mcp-client/README.md) and [model setup guide](https://deepseek-harness.github.io/deepseek-harness/en/guide/providers).
+
+The regular `chat.deepseek.com` interface does not document a way to attach third-party MCP tools. Its built-in **Internet Search** can search Fischipedia without an API key, but that is only a search fallback: it does not call this project's server or its MCP tools. [DeepSeek's web-search announcement](https://api-docs.deepseek.com/news/news1210/).
 
 ### ChatGPT web: custom MCP connector
 
