@@ -8,6 +8,15 @@
 
 Облачный Worker обращается к MediaWiki API **официальной** Fischipedia при вызове инструмента. Чату не нужны ваш компьютер, локальная база или запущенный GitHub Actions. Сервер доступен по MCP Streamable HTTP и предоставляет инструменты только для чтения.
 
+### Если чат не может подключить MCP: резервный способ через GitHub
+
+В репозитории опубликованы прямые инструкции для агентов в [`AGENTS.md`](https://raw.githubusercontent.com/zarell1/fish-wiki-mcp/main/AGENTS.md). Если чат умеет открывать URL, но не может подключить MCP, попросите его прочитать этот файл и самостоятельно запросить официальный MediaWiki API Fischipedia. Например, эти ссылки открыты и не требуют ключа или загрузки MCP:
+
+- [Найти Napoleonfish в Fischipedia](https://fischipedia.org/w/api.php?action=query&list=search&srsearch=Napoleonfish&srlimit=10&format=json&formatversion=2)
+- [Прочитать страницу Napoleonfish](https://fischipedia.org/w/api.php?action=parse&page=Napoleonfish&prop=wikitext%7Ccategories&format=json&formatversion=2)
+
+Этот резервный способ использует тот же официальный источник, но HTTP-запросы выполняет сам чат. GitHub хранит инструкции, а MCP-сервер не запускает. Чату всё равно нужен браузер или HTTP-доступ; если сетевых инструментов нет, файл на GitHub не даст ему свежие данные.
+
 ### DeepSeek Harness: реальное подключение удалённого MCP
 
 Чтобы модель вызывала MCP-инструменты в обычном формате чата, используйте официальный [DeepSeek Harness](https://deepseek.com/harness/): его Web UI поддерживает внешние MCP-серверы. Это отдельный веб-чат, не `chat.deepseek.com`; Harness использует DeepSeek API, поэтому в **Settings → Models** понадобится API-ключ.

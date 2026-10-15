@@ -8,6 +8,15 @@
 
 The hosted Worker calls the **official** Fischipedia MediaWiki API when an agent invokes a tool. Cloud chats do not need your PC, a local database, or a running GitHub Actions job. The server is read-only and accepts MCP Streamable HTTP.
 
+### If the chat cannot install MCP: use the GitHub fallback
+
+The repository also publishes direct instructions for agents at [`AGENTS.md`](https://raw.githubusercontent.com/zarell1/fish-wiki-mcp/main/AGENTS.md). If the chat can open URLs but cannot load an MCP connector, tell it to read that file and query the official Fischipedia MediaWiki API directly. For example, these public URLs need no key or MCP download:
+
+- [Search Fischipedia for Napoleonfish](https://fischipedia.org/w/api.php?action=query&list=search&srsearch=Napoleonfish&srlimit=10&format=json&formatversion=2)
+- [Read the Napoleonfish page](https://fischipedia.org/w/api.php?action=parse&page=Napoleonfish&prop=wikitext%7Ccategories&format=json&formatversion=2)
+
+This fallback uses the same official source, but the chat makes HTTP requests itself; GitHub hosts the instructions and does not execute the MCP server. The chat still needs browser/HTTP access. If it has no network tools, no GitHub file can give it live data.
+
 ### DeepSeek Harness: actual remote MCP connection
 
 For model-driven MCP tool calls in a regular chat UI, use the official [DeepSeek Harness](https://deepseek.com/harness/), whose Web UI supports external MCP servers. It is a separate chat from `chat.deepseek.com` and uses the DeepSeek API; an API key is required in **Settings → Models**.
