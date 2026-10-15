@@ -61,9 +61,12 @@ The cloud server provides `wiki_status`, `wiki_search`, `wiki_page`, `wiki_table
 ```powershell
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 node cloud\tests\worker.test.mjs
+node cloud\tests\worker.integration.test.mjs
 node cloud\scripts\validate-artifact.mjs
 .\.venv\Scripts\python.exe fischwiki_api.py probe
 ```
+
+The integration test calls the official API and needs network access; it does not test the published hosting edge.
 
 ## Source and sync
 
