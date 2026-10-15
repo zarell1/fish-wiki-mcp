@@ -29,7 +29,9 @@ Paste the [ready-to-use system prompt](CLOUD_PROMPT.en.md) into the agent instru
 
 ### ChatGPT Web
 
-Custom MCP servers are available in ChatGPT Web on Business and Enterprise/Edu plans; creating and publishing one also depends on workspace role and permissions. Open **Plugins → + → Add custom MCP server**, enter the URL, configure authentication, acknowledge the warning, create the plugin, and enable the read-only tools in chat. Follow [OpenAI's setup guide](https://help.openai.com/en/articles/12584461-connecting-custom-mcp-servers-in-chatgpt).
+Custom MCP servers are available in ChatGPT Web on supported plans; workspace role and permissions also apply. Open **Plugins → + → Add custom MCP server**, enter the URL, select **No authentication**, acknowledge the warning, create the plugin, and enable the read-only tools in chat. This server does not require OAuth or an API key. Follow [OpenAI's setup guide](https://developers.openai.com/api/docs/guides/custom-mcp-server).
+
+**Access check (15 October 2026):** the Site is active and marked public in ChatGPT Sites, but direct external HTTPS requests to this `chatgpt.site` host currently receive a Cloudflare `403` challenge before reaching the Worker. If ChatGPT's connection check reports access denied, the source code cannot remove that edge restriction. The Site owner needs the hosting operator to allow the ChatGPT MCP connector's requests to this public endpoint, or move the same Worker to an MCP host that permits external server-to-server traffic. Keep the endpoint's existing access protections; do not share or disable a bypass token.
 
 ### Claude Web
 
