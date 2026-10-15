@@ -61,9 +61,12 @@ py -3 -m venv .venv
 ```powershell
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 node cloud\tests\worker.test.mjs
+node cloud\tests\worker.integration.test.mjs
 node cloud\scripts\validate-artifact.mjs
 .\.venv\Scripts\python.exe fischwiki_api.py probe
 ```
+
+Интеграционный тест обращается к официальному API и требует интернет; он не проверяет опубликованный hosting edge.
 
 ## Источник и синхронизация
 
