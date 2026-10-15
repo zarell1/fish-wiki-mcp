@@ -51,6 +51,18 @@ The repository root also contains `agent_config.json`, `api_tools.json`, `agent_
 - `browser_prompt.txt` is a browser-search instruction set. It is not an MCP connection and cannot guarantee exhaustive Wiki coverage.
 - For cloud agents, use the hosted MCP and [cloud prompt](CLOUD_PROMPT.en.md), or the official HTTP fallback in the [route-selection guide](agents.en.md#repository-link-only).
 
-## Direct MediaWiki API
+## Hosted HTTP and direct MediaWiki API
 
-If the host client exposes a browser/HTTP tool but no MCP tools, use that tool to query `https://fischipedia.org/w/api.php`. This is an HTTP fallback, not an MCP tool call. A prompt or repository link cannot grant network access, and opening the `/mcp` URL with a regular fetcher does not invoke MCP. See [Repository link only](agents.en.md#repository-link-only) for instructions and examples.
+If the host client exposes a browser/HTTP tool but no MCP client, use GET requests to the hosted JSON routes. Base URL: `https://fish-wiki-mcp.leafy-bream-8099.chatgpt.site/api/`.
+
+| GET route | Parameters |
+| --- | --- |
+| `status` | none |
+| `search` | required `query`; optional `limit` (1–50) |
+| `page` | required `title`; optional `max_chars` (1–30000) |
+| `table` | required `title`; optional `index` (0–100) |
+| `category` | required `name`; optional `limit` (1–500), `continue_token` |
+| `pages` | optional `namespace`, `prefix`, `limit` (1–500), `continue_token` |
+| `recent-changes` | optional `limit` (1–100) |
+
+Each route returns the JSON tool result directly, including `source_url` and `continue_token` where relevant. URL-encode parameter values and pass continuation tokens unchanged. These public, read-only routes query the same official Fischipedia API as MCP. If the hosted routes are unavailable, use the host's HTTP tool with `https://fischipedia.org/w/api.php`. Neither path is MCP. A prompt or repository link cannot grant network access, and opening `/mcp` with an ordinary fetcher does not invoke MCP. See [Repository link only](agents.en.md#repository-link-only) for examples.

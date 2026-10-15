@@ -12,6 +12,9 @@ globalThis.fetch = async (input) => {
   if (url.searchParams.get("list") === "categorymembers") {
     return Response.json({ query: { categorymembers: [] }, continue: { continue: "||", cmcontinue: "next" } });
   }
+  if (url.searchParams.get("list") === "search") {
+    return Response.json({ query: { searchinfo: { totalhits: 1 }, search: [{ title: "Blue Whale", timestamp: "now", snippet: "Official result" }] } });
+  }
   return Response.json({ query: {} });
 };
 
@@ -69,4 +72,21 @@ assert.equal((await nextPage.json()).result.isError, false);
 const continuationQuery = apiCalls.at(-1).searchParams;
 assert.equal(continuationQuery.get("continue"), "||");
 assert.equal(continuationQuery.get("cmcontinue"), "next");
-console.log("Cloud MCP protocol, tool listing, and official-domain status call passed");
+
+const httpStatus = await worker.fetch(new Request("https://example.test/api/status"));
+assert.equal(httpStatus.status, 200);
+assert.equal(httpStatus.headers.get("access-control-allow-origin"), "*");
+assert.equal((await httpStatus.json()).source, "https://fischipedia.org");
+assert.equal(apiCalls.at(-1).hostname, "fischipedia.org");
+
+const httpSearch = await worker.fetch(new Request("https://example.test/api/search?query=Blue%20Whale&limit=5"));
+assert.equal(httpSearch.status, 200);
+assert.equal(apiCalls.at(-1).searchParams.get("srsearch"), "Blue Whale");
+assert.equal(apiCalls.at(-1).searchParams.get("srlimit"), "5");
+
+const invalidHttpQuery = await worker.fetch(new Request("https://example.test/api/search?query=test&limit=500"));
+assert.equal(invalidHttpQuery.status, 400);
+const preflight = await worker.fetch(new Request("https://example.test/api/page", { method: "OPTIONS" }));
+assert.equal(preflight.status, 204);
+assert.equal(preflight.headers.get("access-control-allow-methods"), "GET, OPTIONS");
+console.log("Cloud MCP and HTTP API routes, validation, CORS, and official-domain calls passed");

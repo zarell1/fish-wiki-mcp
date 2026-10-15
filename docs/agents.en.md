@@ -70,7 +70,7 @@ In Claude Desktop, add this remote server through **Settings → Connectors**. R
 If an AI receives only this repository link, ask it to read the short map in [`llms.txt`](../llms.txt), then the agent instructions in [`AGENTS.md`](../AGENTS.md). The link itself gives the model no network tools. It should select a route the host actually provides:
 
 1. **The host connected remote MCP and exposed its tools:** call them. If the host supports MCP but is not configured yet, its administrator/user must add the URL from this guide, enable the discovered tools, and forward results to the model.
-2. **No MCP tools, but the host provided a browser/HTTP tool:** use that tool to query `https://fischipedia.org/w/api.php`. For example, search:
+2. **No MCP tools, but the host provided a browser/HTTP tool:** call the repository's JSON endpoints with GET. Check `https://fish-wiki-mcp.leafy-bream-8099.chatgpt.site/api/status`, search with `/api/search?query=Napoleonfish&limit=10`, then read `/api/page?title=Napoleonfish` or `/api/table?title=Napoleonfish&index=0`. For complete listings use `/api/category?name=<encoded category>&limit=100` or `/api/pages?namespace=0&limit=100`; pass `continue_token` unchanged. These routes call the same live official API and return JSON with `source_url` links. If the repo routes are unavailable, query Fischipedia directly:
 
    ```text
    https://fischipedia.org/w/api.php?action=query&list=search&srsearch=Napoleonfish&srlimit=10&format=json&formatversion=2
