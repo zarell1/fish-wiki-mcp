@@ -15,7 +15,8 @@ First check what the AI environment can do, then follow one route:
 
 ## Cloud chat with MCP
 
-**Server:** `https://fish-wiki-mcp.leafy-bream-8099.chatgpt.site/mcp`  
+**Server:** `https://fish-wiki-mcp.leafy-bream-8099.chatgpt.site/mcp`
+
 **Transport:** Streamable HTTP. The server calls Fischipedia directly; no local computer or database is needed.
 
 1. Add the URL as a custom remote MCP server in a supported client.

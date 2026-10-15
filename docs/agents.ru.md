@@ -15,7 +15,8 @@
 
 ## Облачный чат с MCP
 
-**Сервер:** `https://fish-wiki-mcp.leafy-bream-8099.chatgpt.site/mcp`  
+**Сервер:** `https://fish-wiki-mcp.leafy-bream-8099.chatgpt.site/mcp`
+
 **Транспорт:** Streamable HTTP. Сервер обращается напрямую к Fischipedia; ваш компьютер и локальная база не нужны.
 
 1. В настройках поддерживаемого клиента добавьте пользовательский remote MCP сервер с URL выше.
