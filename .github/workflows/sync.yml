@@ -1,0 +1,63 @@
+name: Sync official Fischipedia index
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: fischipedia-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Restore latest index
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request, zipfile
+          api = f"https://api.github.com/repos/{os.environ['REPOSITORY']}/actions/artifacts?name=fish-wiki-index&per_page=1"
+          request = urllib.request.Request(api, headers={"Authorization": f"Bearer {os.environ['GH_TOKEN']}", "Accept": "application/vnd.github+json"})
+          try:
+              with urllib.request.urlopen(request) as response:
+                  artifacts = json.load(response)["artifacts"]
+              if artifacts:
+                  request = urllib.request.Request(artifacts[0]["archive_download_url"], headers={"Authorization": f"Bearer {os.environ['GH_TOKEN']}"})
+                  with urllib.request.urlopen(request) as response, open("index.zip", "wb") as archive:
+                      archive.write(response.read())
+                  with zipfile.ZipFile("index.zip") as archive:
+                      archive.extract("fischwiki.sqlite3", ".")
+                  os.remove("index.zip")
+                  print(f"Restored index artifact {artifacts[0]['id']}")
+              else:
+                  print("No prior index artifact; creating the initial index")
+          except Exception as error:
+              raise SystemExit(f"Could not restore the previous index: {error}")
+          PY
+      - name: Probe official MediaWiki API
+        run: python fischwiki_api.py probe
+      - name: Synchronize index
+        run: python fischwiki_api.py sync
+      - name: Save latest index
+        uses: actions/upload-artifact@v4
+        with:
+          name: fish-wiki-index
+          path: fischwiki.sqlite3
+          if-no-files-found: error
+          retention-days: 7
+          overwrite: true

@@ -1,0 +1,67 @@
+{
+  "version": "1.0",
+  "name": "Fisch Wiki Evidence Tools",
+  "base_url": "http://127.0.0.1:8765",
+  "source": "https://fischipedia.org/wiki/Fisch_Wiki",
+  "note": "This is the definition for the LOCAL service included in this project, not a verified public Fischipedia API. AI tools must be connected to these HTTP routes by the host/orchestrator.",
+  "read_only": true,
+  "tools": [
+    {
+      "name": "wiki_status",
+      "method": "GET",
+      "path": "/api/status",
+      "purpose": "Check full index coverage and freshness before any claim of completeness",
+      "params": {}
+    },
+    {
+      "name": "wiki_search",
+      "method": "GET",
+      "path": "/api/search",
+      "purpose": "Search indexed content fragments, not a guarantee of a complete list",
+      "params": {"q": "string required", "limit": "integer 1..100 default 20", "offset": "integer >=0 default 0"}
+    },
+    {
+      "name": "wiki_page",
+      "method": "GET",
+      "path": "/api/page",
+      "purpose": "Read original page content and extracted tables with provenance",
+      "params": {"title": "string required", "offset": "integer default 0", "max_chars": "integer 1..100000 default 12000", "include_tables": "boolean default true", "include_links": "boolean default false", "include_images": "boolean default false", "include_raw": "boolean default false"}
+    },
+    {
+      "name": "wiki_table",
+      "method": "GET",
+      "path": "/api/table",
+      "purpose": "Read one table on a wiki page without loading all other tables",
+      "params": {"title": "string required", "index": "integer default 0"}
+    },
+    {
+      "name": "wiki_category",
+      "method": "GET",
+      "path": "/api/category",
+      "purpose": "Enumerate indexed articles in one category, paginating through total",
+      "params": {"name": "string required", "limit": "integer 1..500 default 100", "offset": "integer default 0"}
+    },
+    {
+      "name": "wiki_pages",
+      "method": "GET",
+      "path": "/api/pages",
+      "purpose": "Enumerate all indexed-inventory titles and namespaces with pagination",
+      "params": {"namespace": "optional integer", "prefix": "optional string", "limit": "integer 1..500 default 100", "offset": "integer default 0"}
+    },
+    {
+      "name": "wiki_failed",
+      "method": "GET",
+      "path": "/api/failed",
+      "purpose": "List pages that failed to download during last synchronization",
+      "params": {"limit": "integer 1..500 default 100", "offset": "integer default 0"}
+    }
+  ],
+  "mandatory_rules": {
+    "sources": "Only data from fischipedia.org, with real page links",
+    "never_guess": true,
+    "missing_field": "Не указано",
+    "full_list_requires_exhaustive_pagination": true,
+    "claim_completeness_only_when_status_complete": true,
+    "citations_for_each_row": true
+  }
+}
